@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1507818133 "paper.tex" "paper.pdf" "paper" 1507818134
+["pdflatex"] 1507820506 "paper.tex" "paper.pdf" "paper" 1507820506
   "/etc/texmf/web2c/texmf.cnf" 1500559619 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
@@ -74,11 +74,11 @@
   "7DayMovingAverageTemperaturePlot.png" 1507814106 34167 61ab4e2269e2c58802c7f58f62fbcd06 ""
   "AverageTemperaturePlot.png" 1507814106 42631 59eaebbb55939f2337d2a03934767cbf ""
   "IEEEtran.cls" 1507814106 201351 ed4d5bc4bb05069aedc6d1f260df8ac0 ""
-  "paper.aux" 1507818134 1982 c5d8ce152aeb3ef6b575b405a0fdd24d ""
-  "paper.out" 1507818134 298 529469d99f90acc60a25303acbbed444 ""
-  "paper.tex" 1507818078 16861 762020f56d163fdb6f0b75735d24607f ""
+  "paper.aux" 1507820506 1982 c5d8ce152aeb3ef6b575b405a0fdd24d ""
+  "paper.out" 1507820506 298 529469d99f90acc60a25303acbbed444 ""
+  "paper.tex" 1507820485 16690 c495940f78145dcbdcdae850f7afdf12 ""
   (generated)
-  "paper.aux"
   "paper.out"
-  "paper.pdf"
   "paper.log"
+  "paper.aux"
+  "paper.pdf"
