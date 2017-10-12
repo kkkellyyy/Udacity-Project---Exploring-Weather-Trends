@@ -26,4 +26,10 @@ The final analysis will take the form of a PDF document which contains a plot of
 * How calculations were perfomed
 * Key considerations when analyzing the trends
 
-All code used will be placed in this repository for inspection. 
+All code used will be placed in this repository for inspection.
+
+### References and Citations
+
+1. The Report was compiled using LaTeX. The Template used can be found in the url below:
+
+https://www.overleaf.com/latex/templates/template-for-lnt-seminar-report/ngyxxzrpkgbs#
