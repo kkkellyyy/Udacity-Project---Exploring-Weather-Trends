@@ -3,6 +3,7 @@
 % some very useful LaTeX packages include:
 
 \usepackage{hyperref}
+\usepackage{listings}
 
 %\usepackage{cite}      % Written by Donald Arseneau
                         % V1.6 and later of IEEEtran pre-defines the format
@@ -150,11 +151,55 @@
 	\section{Methods}    
     
     The data which is used in this analysis was collected from a database using Structures Query Language (SQL) and was subsequently processed using various libraries in Python. (i.e. Pandas, Numpy, Matplotlib, etc.) The scripts contain step by step information about how it was written and can be found at the following url \footnote{https://github.com/SThornewillvE/Udacity-Project---Exploring-Weather-Trends}. After a simple visualisation was created, the data was transformed to fit a seven year moving average in order to make the data less noisy.
+    
+    \subsection{SQL}
+    
+    The data was exported using the following code;
+    
+    \begin{small}
+    \begin{lstlisting}
+SELECT *
+FROM city_data
+WHERE city = 'Berlin';
+    
+Select *
+FROM global_data;
+    \end{lstlisting}
+    \end{small}
+    
+    The resulting CSV files were saved to the github repository.
+    
+    \subsection{Python}
+    
+    The CSV files were imported into Python using Pandas. Upon initial investigation of the data it was found that there were missing values before the year 1950 for the Berlin dataset in addition to missing years past 2013 for the global dataset. These years were dropped in order to give the data the same shape for analysis. Cleaning the data in this way meant that no imputation was necessary.
+    
+    Afterwards, the data was transformed into a 7 year moving average with the following Python algorithm where the variable ``moving" is the amount of years used for the moving average:
+    
+    \begin{small}
+    \begin{lstlisting}
+moving = 7
+average = []
+TempMovingAverageDF = AvgTempDF
 
+for i in range(len(AvgTempDF)):
+    average.append(
+    	np.average(
+        AvgTempDF.iloc[(i-moving):i, 1]))
+    
+for i in range(len(AvgTempDF)):   
+	TempMovingAverageDF.iloc[i, 1] = average[i]
+    \end{lstlisting}
+    \end{small}
+    
+    It should be noted that this is an abstracted algorithm to bring the point of the code across to the reader and is not an exact copy of the code. For more information see the github repository.
+    
 % Main Part
 \section{Results and Discussion}
 
-	It was found that the average global temperature is indeed increasing over time as can be seen in figure \ref{fig1} where the average global temperature, shown in orange, has high fluctuations in the mid 1700s which slowly stabilizes into an upward trend. The average temperature of Berlin changes far more over relatively short intervals of time. The global temperature tends to have less variation since it is an average over a much larger area that includes multiple landscapes such a forests, mountains, oceans and arctic areas. The average temperature is also driven downward relative to Berlin for the same reason.\\
+	It was found that the average global temperature is increasing over time as can be seen in figure \ref{fig1} where the average global temperature, shown in orange, has high fluctuations in the mid 1700s which slowly stabilizes into an upward trend. This upward trend coincides with the start of the industrial revolution where humans began to harness fossil fuels as a form of energy causing emissions of greenhouse gases.\\
+    
+    The variance in Berlin's temperature changes very large relative to the average global temperature.
+This difference in variance is due to the fact that the global temperatures cover a much wider than a single city and includes various biomes with differing temperatures due to change in atmospheric composition, the type of precipitation, latitude/longitude, altitude and sunlight exposure. Covering such a large and varied area means that it is very difficult to change the average values over time. The average temperature is also driven downward relative to Berlin for the same reason as Berlin does not have icy tundras and arctic areas driving its temperature down.\\
 
 	\begin{figure}[!hbt]
 		% Center the figure.
@@ -162,13 +207,15 @@
 		% Include the eps file, scale it such that it's width equals the column width. You can also put width=8cm for example...
 		\includegraphics[width=\columnwidth]{AverageTemperaturePlot.png}
 		% Create a subtitle for the figure.
-		\caption{Simulation results on the AWGN channel. Average throughput $k/n$ vs $E_s/N_0$.}
+		\caption{Average temperature in Celsius over time in years before data transformations with Berlin shown in blue and Global values shown in orange.}
 		% Define the label of the figure. It's good to use 'fig:title', so you know that the label belongs to a figure.
 		\label{fig1}
 		\end{center}
 	\end{figure}
     
-    When the data was transformed to fit a 7 year moving average, as can be seen by figure \ref{fig2}, trends become more obvious. This is because taking an average of sections of the data mean that either more varience in a single point is required in order to raise the 7 year average temperature, these conditions can also be satisfied if the temperature raises uniformly over time. The same trend of Berlin having a higher temperature and the presence of large fluctuations in temperatures during the late 1700s is still evident. However, the exponential rise of temperature over time becomes much easier to spot. This is because the temperature is steadily rising instead of having outliers as was often the case before the industrial revolution. This suggests that the forces which are driving the upward in temperatures are compounding themselves. A possible reason for the increase in global temperatures is the increased concentration of carbon dioxide in the atmosphere due to anthropomorphic emissions, but this cannot be concluded from this data alone and more research is required to find a causal link between carbon dioxide concentration and global temperature levels.
+    When the data was transformed to a 7 year moving average, as can be seen by figure \ref{fig2},  the trends become more obvious because they are less obscured by noise and become more consistent as they are less prone to outliers. The increased resilience to outliers is because taking an average of sections of the data mean that either more varience in a single point is required in order to raise the 7 year average temperature in the same manner that global temperatures are more difficult to change as explained in the last paragraph. Conditions to raise the temperature can also be satisfied if the temperature raises uniformly over time.\\
+    
+    The same trend of Berlin having a higher temperature and the presence of large fluctuations in temperatures during the late 1700s is still evident. However, the exponential rise of temperature over time becomes much easier to spot as the temperature consistently rises as the years progress. This suggests that the forces which are driving climbing temperatures are compounding themselves. This could coincide with the rising carbon dioxide emissions per capita as the global population increases exponentially for instance. However, the direct cause cannot easily be inferred from this data alone. Until the process causally driving this change is determined, no recommendation can be made.\\
 
 	\begin{figure}[!hbt]
 		\begin{center}
@@ -177,11 +224,13 @@
 		\label{fig2}
 		\end{center}
 	\end{figure}
+    
+    This evidence is cause for alarm because there are many systems on the planet which are dependent on temperature from atmospheric chemistry which determines the quality of air to dissolved carbon dioxide in the water, in addition to the suspicion that this is driven by carbon dioxide, which can decrease the acidity of various ocean bodies. It is worth noting that the rising temperature of the globe by roughly 1.5°C is not trivial and requires a large amount of energy to do so whatever is causing this ought to be a proportionally large process.
 
 \newpage
 
 \section{Conclusion}
-	In conclusion, there is evidence to suggest that the temperature of the globe has been rising over the past century with the global average rising by roughly 1.5°C. More research is required in order to determine where this change in temperature comes from and what should be done about it if at all and what this could mean for the world.
+	In conclusion, there is evidence to suggest that the temperature of the globe has been rising over the past century at a rate which seems to be exponential. This could have a profound effect on global ecosystems as many of them are dependent on temperature in order to function naturally. More research is required in order to determine where this change in temperature comes from and what should be done about it if at all and what this could mean for the world.
 
 % Your document ends here!
 \end{document}
