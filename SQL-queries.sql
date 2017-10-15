@@ -10,18 +10,21 @@ city_list, I have downloaded the information for "Berlin" instead.
 -- Proof that Bonn is not in city_list
 SELECT *
 FROM city_list
-where country = 'Germany';
+WHERE country like 'Germany';
 -- Returns three cities, Berlin, Hamburg and Munch but not Bonn or Cologne.
 
--- Download the temperature data for Berlin
+-- Rename columns for joining
+ALTER TABLE global_data RENAME COLUMN avg_temp to global_avg_temp;
+
+ALTER TABLE city_data RENAME COLUMN avg_temp to city_avg_temp;
+
+-- Download the joined tables
 SELECT *
-FROM city_data
-WHERE city = 'Berlin';
--- Saved as 'BerlinYearlyAvgTemp.csv'
+FROM global_data INNER JOIN city_data
+ON global_data.year=city_data.year
+WHERE city like 'Berlin';
+-- Saved as YearlyAvgTemp.csv
 
---Download global temperature data
-Select *
-FROM global_data;
--- Saved as 'GlobalYearlyAvgTemp.csv'
-
--- SQL query complete!
+/* An inner join was chosen because I have enough data to process
+even if I drop a couple of rows. Doing this in SQL means I don't
+need to do this in python later.*/
